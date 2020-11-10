@@ -1,0 +1,25 @@
+version: '3'
+
+services:
+  google-chrome:
+    build: .
+    image: google-chrome:71.0.3578.30
+    container_name: chrome
+    deploy:
+      resources:
+        limits:
+          cpus: '0'
+          memory: 512M
+    environment:
+      - DISPLAY=unix$DISPLAY
+    volumes:
+      - $HOME/Downloads:/root/Downloads
+      - /tmp/.X11-unix:/tmp/.X11-unix
+    devices:
+      - "/dev/snd"
+    networks:
+      hostnet: {}
+    privileged : true
+
+networks:
+  hostnet:
